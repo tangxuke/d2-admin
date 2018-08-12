@@ -1,7 +1,13 @@
+/* eslint-disable */
+
 // layout
 import layoutHeaderAside from '@/layout/header-aside'
 
-const meta = { requiresAuth: true }
+const meta = { requiresAuth: true}
+
+//自定义路由
+//系统设置
+import systemSetting from '@/menu/modules/system-setting'
 
 /**
  * 在主框架内显示
@@ -17,6 +23,11 @@ const frameIn = [
         name: 'index',
         meta,
         component: () => import('@/pages/index')
+      },
+      {
+        path: '/menu',
+        meta:{...meta,title:'菜单管理'},
+        component: () => import('@/pages/menu/Menu')
       }
     ]
   },
@@ -226,7 +237,8 @@ const frameIn = [
       { path: 'index', name: `${pre}index`, component: () => import('@/pages/demo/business/index'), meta: { ...meta, title: '示例首页' } },
       { path: 'table/1', name: `${pre}table-1`, component: () => import('@/pages/demo/business/table/1'), meta: { ...meta, title: '表格 1' } }
     ])('demo-business-')
-  }
+  },
+  systemSetting
 ]
 
 /**

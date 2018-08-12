@@ -54,5 +54,10 @@ export const menuHeader = [
       }
     ]
   },
-  demoBusiness
+  demoBusiness,
+  {
+    path:'/menu',
+    name:'menu',
+    title:'菜单管理'
+  }
 ]

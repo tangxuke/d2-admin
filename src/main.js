@@ -23,6 +23,10 @@ import pluginImport from '@/plugin/import'
 import pluginExport from '@/plugin/export'
 import pluginOpen from '@/plugin/open'
 
+import iView from 'iview'
+import 'iview/dist/styles/iview.css'
+Vue.use(iView)
+
 // 菜单和路由设置
 import router from './router'
 import { menuHeader, menuAside } from '@/menu'
@@ -32,7 +36,7 @@ Vue.use(ElementUI)
 Vue.use(VCharts)
 Vue.use(contentmenu)
 Vue.use(pluginLog)
-Vue.use(pluginError)
+//Vue.use(pluginError)
 Vue.use(pluginImport)
 Vue.use(pluginExport)
 Vue.use(pluginOpen)
@@ -56,11 +60,11 @@ new Vue({
   },
   mounted () {
     // D2Admin 开发环境检查更新
-    util.checkUpdate(this)
+    //util.checkUpdate(this)
     // 获取并记录用户 UA
     this.$store.commit('d2adminUaGet')
     // 展示系统信息
-    util.showInfo()
+    //util.showInfo()
     // 用户登陆后从数据库加载一系列的设置
     this.$store.commit('d2adminLoginSuccessLoad')
     // 初始化全屏监听

@@ -10,6 +10,11 @@ export default {
       children: [
         { path: `${pre}table/1`, title: '表格 1' }
       ]
+    },
+    {
+      path:'/page-demo2',
+      title:'新建示例2',
+      icon:'table'
     }
   ])('/demo/business/')
 }

@@ -20,24 +20,24 @@
                 <i slot="prepend" class="fa fa-keyboard-o"></i>
               </el-input>
             </el-form-item>
-            <el-form-item prop="code">
+            <!--el-form-item prop="code">
               <el-input type="text" v-model="formLogin.code" placeholder="- - - -">
                 <template slot="prepend">验证码</template>
                 <template slot="append">
                   <img class="login-code" src="./image/login-code.png">
                 </template>
               </el-input>
-            </el-form-item>
+            </el-form-item-->
             <el-button @click="submit" type="primary" class="button-login">登录</el-button>
           </el-form>
         </el-card>
       </div>
       <!-- 快速登陆按钮 -->
-      <el-button type="info" class="button-help" @click="dialogVisible = true">
+      <!--el-button type="info" class="button-help" @click="dialogVisible = true">
         快速选择用户（测试功能）
-      </el-button>
+      </el-button-->
     </div>
-    <el-dialog
+    <!--el-dialog
       title="快速选择用户"
       :visible.sync="dialogVisible"
       width="400px">
@@ -49,7 +49,7 @@
           </div>
         </el-col>
       </el-row>
-    </el-dialog>
+    </el-dialog-->
   </div>
 </template>
 
@@ -61,30 +61,10 @@ import { mapActions } from 'vuex'
 export default {
   data () {
     return {
-      // 快速选择用户
-      dialogVisible: false,
-      users: [
-        {
-          name: '管理员',
-          username: 'admin',
-          password: 'admin'
-        },
-        {
-          name: '编辑',
-          username: 'editor',
-          password: 'editor'
-        },
-        {
-          name: '用户1',
-          username: 'user1',
-          password: 'user1'
-        }
-      ],
       // 表单
       formLogin: {
         username: 'admin',
-        password: 'admin',
-        code: 'v9am'
+        password: 'admin'
       },
       // 校验
       rules: {
@@ -93,9 +73,6 @@ export default {
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' }
-        ],
-        code: [
-          { required: true, message: '请输入验证码', trigger: 'blur' }
         ]
       }
     }
