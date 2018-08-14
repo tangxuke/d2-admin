@@ -3,7 +3,7 @@
 // layout
 import layoutHeaderAside from '@/layout/header-aside'
 
-const meta = { requiresAuth: false}
+const meta = { requiresAuth: true}
 
 /**
  * 在主框架内显示
@@ -19,11 +19,6 @@ const frameIn = [
         name: 'index',
         meta,
         component: () => import('@/pages/index')
-      },
-      {
-        path: '/menu',
-        meta:{...meta,title:'菜单管理'},
-        component: () => import('@/pages/menu/Menu')
       }
     ]
   },
@@ -234,7 +229,25 @@ const frameIn = [
       { path: 'table/1', name: `${pre}table-1`, component: () => import('@/pages/demo/business/table/1'), meta: { ...meta, title: '表格 1' } }
     ])('demo-business-')
   },
-  systemSetting
+  {
+    path:'/system',
+    name:'system',
+    meta,
+    redirect:{name:'system-bmsz'},
+    component:layoutHeaderAside,
+    children:[
+      {
+        path:'/system/department',
+        name:'system-department',
+        component:()=>import('@/pages/system/department'),meta:{...meta,title:'部门设置'}
+      },
+      {
+        path:'/system/classroom',
+        name:'system-classroom',
+        component:()=>import('@/pages/system/classroom'),meta:{...meta,title:'教室设置'}
+      }
+    ]
+  }
 ]
 
 /**

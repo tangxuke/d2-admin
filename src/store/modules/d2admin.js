@@ -100,22 +100,26 @@ export default {
       // 开始请求登录接口
       vm.$axios({
         method: 'post',
-        url: '/login',
+        url: '/users/login',
         data: {
           username,
           password
         }
       })
         .then(res => {
+          if(!res.success){
+            vm.$message.error(res.message)
+            return;
+          }
           // 设置 cookie 一定要存 uuid 和 token 两个 cookie
           // 整个系统依赖这两个数据进行校验和存储
           // uuid 是用户身份唯一标识 用户注册的时候确定 并且不可改变 不可重复
           // token 代表用户当前登录状态 建议在网络请求中携带 token，如有必要 token 需要定时更新，默认保存一天
-          util.cookies.set('uuid', res.data.uuid)
-          util.cookies.set('token', res.data.token)
+          util.cookies.set('uuid', res.result.uuid)
+          util.cookies.set('token', res.result.token)
           // 设置 vuex 用户信息
           commit('d2adminUserInfoSet', {
-            name: res.data.name
+            name: res.result.name
           })
           // 用户登陆后从数据库加载一系列的设置
           commit('d2adminLoginSuccessLoad')

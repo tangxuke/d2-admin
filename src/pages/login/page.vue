@@ -63,8 +63,8 @@ export default {
     return {
       // 表单
       formLogin: {
-        username: 'admin',
-        password: 'admin'
+        username: 'admin@demo',
+        password: '123'
       },
       // 校验
       rules: {

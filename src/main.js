@@ -23,9 +23,9 @@ import pluginImport from '@/plugin/import'
 import pluginExport from '@/plugin/export'
 import pluginOpen from '@/plugin/open'
 
-import iView from 'iview'
-import 'iview/dist/styles/iview.css'
-Vue.use(iView)
+//import iView from 'iview'
+//import 'iview/dist/styles/iview.css'
+//Vue.use(iView)
 
 // 菜单和路由设置
 import router from './router'

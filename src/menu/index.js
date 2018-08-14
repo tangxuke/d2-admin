@@ -10,6 +10,8 @@ import demoElement from './modules/demo-element'
 import demoPlayground from './modules/demo-playground'
 // 示例
 import demoBusiness from './modules/demo-business'
+//系统设置
+import systemSetting from './modules/system-setting'
 
 // 菜单 侧边栏
 export const menuAside = [
@@ -18,7 +20,8 @@ export const menuAside = [
   demoCharts,
   demoElement,
   demoPlayground,
-  demoBusiness
+  demoBusiness,
+  systemSetting
 ]
 
 // 菜单 顶栏
@@ -55,9 +58,5 @@ export const menuHeader = [
     ]
   },
   demoBusiness,
-  {
-    path:'/menu',
-    name:'menu',
-    title:'菜单管理'
-  }
+  systemSetting
 ]

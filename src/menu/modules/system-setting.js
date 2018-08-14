@@ -3,14 +3,20 @@ import layoutHeaderAside from '@/layout/header-aside'
 
 //系统设置菜单
 export default {
-    path: '/setting',
+    path: '/system',
     title: '系统设置',
-    icon: 'table',
-    component:layoutHeaderAside,
+    icon: 'wrench',
     children: [
         {
-            path: '/setting/bmsz',
+            path: '/system/department',
+            name:'system-department',
+            icon:'users',
             title: '部门设置'
+        },
+        {
+            path: '/system/classroom',
+            name:'system-classroom',
+            title: '教室设置'
         }
     ]
 }
