@@ -3,11 +3,7 @@
 // layout
 import layoutHeaderAside from '@/layout/header-aside'
 
-const meta = { requiresAuth: true}
-
-//自定义路由
-//系统设置
-import systemSetting from '@/menu/modules/system-setting'
+const meta = { requiresAuth: false}
 
 /**
  * 在主框架内显示
