@@ -299,6 +299,7 @@ export default {
      */
     d2adminMenuHeaderSet (state, menu) {
       state.menuHeader = menu
+      
     },
     /**
      * @class menuAside

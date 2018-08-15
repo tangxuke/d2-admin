@@ -8,6 +8,7 @@ const meta = { requiresAuth: true}
 /**
  * 在主框架内显示
  */
+
 const frameIn = [
   {
     path: '/',
@@ -19,6 +20,9 @@ const frameIn = [
         name: 'index',
         meta,
         component: () => import('@/pages/index')
+      },
+      {
+        path: 'demo/charts/list/line/demo1', name: `demo-charts-list-line-demo1`, component: () => import('@/pages/demo/charts/list/line/demo1/index.vue'), meta: { ...meta, title: '折线图示例 1' } 
       }
     ]
   },
@@ -80,7 +84,7 @@ const frameIn = [
     component: layoutHeaderAside,
     children: (pre => [
       { path: 'index', name: `${pre}index`, component: () => import('@/pages/demo/charts/index'), meta: { ...meta, title: '图表首页' } },
-      { path: 'list/line/demo1', name: `${pre}list-line-demo1`, component: () => import('@/pages/demo/charts/list/line/demo1/index.vue'), meta: { ...meta, title: '折线图示例 1' } },
+      //{ path: 'list/line/demo1', name: `${pre}list-line-demo1`, component: () => import('@/pages/demo/charts/list/line/demo1/index.vue'), meta: { ...meta, title: '折线图示例 1' } },
       { path: 'list/line/demo2', name: `${pre}list-line-demo2`, component: () => import('@/pages/demo/charts/list/line/demo2/index.vue'), meta: { ...meta, title: '折线图示例 2' } },
       { path: 'list/line/demo3', name: `${pre}list-line-demo3`, component: () => import('@/pages/demo/charts/list/line/demo3/index.vue'), meta: { ...meta, title: '折线图示例 3' } },
       { path: 'list/line/demo4', name: `${pre}list-line-demo4`, component: () => import('@/pages/demo/charts/list/line/demo4/index.vue'), meta: { ...meta, title: '折线图示例 4' } },
@@ -228,25 +232,6 @@ const frameIn = [
       { path: 'index', name: `${pre}index`, component: () => import('@/pages/demo/business/index'), meta: { ...meta, title: '示例首页' } },
       { path: 'table/1', name: `${pre}table-1`, component: () => import('@/pages/demo/business/table/1'), meta: { ...meta, title: '表格 1' } }
     ])('demo-business-')
-  },
-  {
-    path:'/system',
-    name:'system',
-    meta,
-    redirect:{name:'system-department'},
-    component:layoutHeaderAside,
-    children:[
-      {
-        path:'/system/department',
-        name:'system-department',
-        component:()=>import('@/pages/system/department'),meta:{...meta,title:'部门设置'}
-      },
-      {
-        path:'/system/classroom',
-        name:'system-classroom',
-        component:()=>import('@/pages/system/classroom'),meta:{...meta,title:'教室设置'}
-      }
-    ]
   }
 ]
 

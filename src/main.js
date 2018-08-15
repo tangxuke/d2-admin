@@ -60,7 +60,8 @@ new Vue({
     // 处理路由 得到每一级的路由设置
     this.getAllPageFromRoutes()
     // 设置顶栏菜单
-    this.$store.commit('d2adminMenuHeaderSet', menuHeader)
+    //this.$store.commit('d2adminMenuHeaderSet', menuHeader)
+    //this.$store.commit('d2adminMenuHeaderSet', this.$store.state.mystore.userMenus)
   },
   mounted () {
     // D2Admin 开发环境检查更新
