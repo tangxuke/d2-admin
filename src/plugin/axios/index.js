@@ -9,4 +9,6 @@ axios.interceptors.response.use(res => {
 
 axios.defaults.baseURL='http://localhost:3000/';
 
-Vue.prototype.$axios = axios
+//Vue.prototype.$axios = axios
+
+export default axios

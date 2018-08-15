@@ -16,12 +16,14 @@ import store from '@/store/index'
 import '@/assets/svg-icons'
 import '@/components'
 import '@/mock'
-import '@/plugin/axios'
 import pluginLog from '@/plugin/log'
 import pluginError from '@/plugin/error'
 import pluginImport from '@/plugin/import'
 import pluginExport from '@/plugin/export'
 import pluginOpen from '@/plugin/open'
+
+import axios from '@/plugin/axios'
+Vue.prototype.$axios=axios
 
 //import iView from 'iview'
 //import 'iview/dist/styles/iview.css'
@@ -53,6 +55,8 @@ new Vue({
   i18n,
   render: h => h(App),
   created () {
+    //获取用户菜单
+    this.$store.commit('get-menu',this)
     // 处理路由 得到每一级的路由设置
     this.getAllPageFromRoutes()
     // 设置顶栏菜单
@@ -69,6 +73,8 @@ new Vue({
     this.$store.commit('d2adminLoginSuccessLoad')
     // 初始化全屏监听
     this.fullscreenListenerInit()
+
+    
   },
   watch: {
     // 监听路由 控制侧边栏显示

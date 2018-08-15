@@ -233,7 +233,7 @@ const frameIn = [
     path:'/system',
     name:'system',
     meta,
-    redirect:{name:'system-bmsz'},
+    redirect:{name:'system-department'},
     component:layoutHeaderAside,
     children:[
       {
