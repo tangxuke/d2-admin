@@ -25,10 +25,6 @@ import pluginOpen from '@/plugin/open'
 import axios from '@/plugin/axios'
 Vue.prototype.$axios=axios
 
-//import iView from 'iview'
-//import 'iview/dist/styles/iview.css'
-//Vue.use(iView)
-
 // 菜单和路由设置
 import router from './router'
 import { menuHeader, menuAside } from '@/menu'
@@ -61,7 +57,6 @@ new Vue({
     this.getAllPageFromRoutes()
     // 设置顶栏菜单
     //this.$store.commit('d2adminMenuHeaderSet', menuHeader)
-    //this.$store.commit('d2adminMenuHeaderSet', this.$store.state.mystore.userMenus)
   },
   mounted () {
     // D2Admin 开发环境检查更新
