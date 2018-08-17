@@ -10,10 +10,8 @@
       <!-- 顶栏 -->
       <div class="d2-theme-header" flex-box="0">
         <div class="logo-group" :style="{width: isMenuAsideCollapse ? asideWidthCollapse : asideWidth}">
-          <router-linlk to="/">
           <img v-if="isMenuAsideCollapse" :src="`${$baseUrl}image/theme/${d2adminThemeActiveSetting.name}/logo/icon-only.png`">
           <img v-else :src="`${$baseUrl}image/theme/${d2adminThemeActiveSetting.name}/logo/all.png`">
-          </router-linlk>
         </div>
         <div class="toggle-aside-btn" @click="handleToggleAside">
           <d2-icon name="bars"/>

@@ -20,9 +20,6 @@ const frameIn = [
         name: 'index',
         meta,
         component: () => import('@/pages/index')
-      },
-      {
-        path: 'demo/charts/list/line/demo1', name: `demo-charts-list-line-demo1`, component: () => import('@/pages/demo/charts/list/line/demo1/index.vue'), meta: { ...meta, title: '折线图示例 1' } 
       }
     ]
   },

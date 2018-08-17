@@ -28,7 +28,8 @@ Vue.prototype.$axios=axios
 // 菜单和路由设置
 import router from './router'
 import { menuHeader, menuAside } from '@/menu'
-import { frameInRoutes } from '@/router/routes'
+import frameInRoutes from '@/router/my-router-index'
+//import { frameInRoutes } from '@/router/routes'
 
 Vue.use(ElementUI)
 Vue.use(VCharts)

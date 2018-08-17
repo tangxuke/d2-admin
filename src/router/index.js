@@ -4,14 +4,27 @@ import VueRouter from 'vue-router'
 import util from '@/libs/util.js'
 
 // 路由数据
-import routes from './routes'
-import myroutes from './myroutes'
+import routes from './my-router-index'
+
+import layoutHeaderAside from '@/layout/header-aside'
 
 Vue.use(VueRouter)
 
 // 导出路由 在 main.js 里使用
 const router = new VueRouter({
-  routes:[...routes,...myroutes]
+  routes:[{
+    path: '/',
+    redirect: { name: 'index' },
+    component: layoutHeaderAside,
+    children: [
+      {
+        path: 'index',
+        name: 'index',
+        meta:{ requiresAuth: true,title:'首页'},
+        component: () => import('@/pages/index')
+      }
+    ]
+  },...routes]
 })
 
 /**
