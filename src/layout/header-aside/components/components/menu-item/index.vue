@@ -5,6 +5,7 @@
   </el-menu-item>
 </template>
 
+
 <script>
 import uniqueid from 'lodash.uniqueid'
 export default {
