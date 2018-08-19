@@ -24,7 +24,18 @@ const router = new VueRouter({
         component: () => import('@/pages/index')
       }
     ]
-  },...routes]
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/pages/login')
+  },
+  ...routes,
+  {
+    path:'*',
+    component:()=>import('@/pages/error-page-404')
+  }
+]
 })
 
 /**

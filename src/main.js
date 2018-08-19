@@ -27,7 +27,7 @@ Vue.prototype.$axios=axios
 
 // 菜单和路由设置
 import router from './router'
-import { menuHeader, menuAside } from '@/menu'
+//import { menuHeader, menuAside } from '@/menu'
 import frameInRoutes from '@/router/my-router-index'
 //import { frameInRoutes } from '@/router/routes'
 
@@ -76,7 +76,9 @@ new Vue({
   watch: {
     // 监听路由 控制侧边栏显示
     '$route.matched' (val) {
-      const _side = menuAside.filter(menu => menu.path === val[0].path)
+      console.log(val)
+      //const _side = menuAside.filter(menu => menu.path === val[0].path)
+      const _side = this.$store.state.d2admin.menuHeader.filter(menu => menu.path === val[0].path)
       this.$store.commit('d2adminMenuAsideSet', _side.length > 0 ? _side[0].children : [])
     }
   },
