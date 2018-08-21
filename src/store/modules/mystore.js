@@ -8,7 +8,7 @@ export default {
     },
     mutations:{
         'get-menu':function(state,vm){
-            console.log(vm.$axios.defaults)
+
             vm.$axios.get('/menus/menu-list')
             .then(value=>{
                 if(value.success){

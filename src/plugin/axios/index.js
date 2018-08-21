@@ -1,5 +1,7 @@
-import Vue from 'vue'
 import axios from 'axios'
+
+axios.defaults.baseURL='http://localhost:3000/';
+axios.defaults.withCredentials=true;
 
 axios.interceptors.response.use(res => {
   return res.data
@@ -7,8 +9,6 @@ axios.interceptors.response.use(res => {
   return Promise.reject(err)
 })
 
-axios.defaults.baseURL='http://localhost:3000/';
-axios.defaults.withCredentials=true;
 
 //Vue.prototype.$axios = axios
 

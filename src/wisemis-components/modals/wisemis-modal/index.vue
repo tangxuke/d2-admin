@@ -2,7 +2,7 @@
 <div id="firMasker">
 	<div class="modal" id="operateDept" avalonctrl="operateDept" style="width:800px;">
 
-	<div class="modal-header">
+	<div class="modal-header" @mousedown="dragMousedown">
 		<a class="close triggerClosePopup">×</a>
 		<h4 class="modal-title">修改部门</h4>
 	</div>
@@ -24,19 +24,56 @@ export default {
 	methods:{
 	/*鼠标拖动弹窗的 mousedown事件*/
 	dragMousedown:function(e) {
-	
-	var $tar = $(this);
+        if(e.button!==0)
+            return;
+        var modal=document.getElementById('operateDept');
+        
+        var x,y;
+        var el=e.target;
+        
+        
+        x=e.clientX;
+        y=e.clientY;
+
+        var left=modal.style.left;
+        if(left=='')
+            left=modal.offsetLeft;
+
+        function setTitle(s){
+            var e=modal.querySelector('h4')
+            e.innerHTML=s
+        }
+        
+
+        el.onmousemove=function(ev){
+            var xx,yy;
+            xx=ev.clientX;
+            yy=ev.clientY;
+            
+            modal.style.left=left+(xx-x)+'px';
+            setTitle(modal.offsetLeft)
+            //x=xx;
+        }
+
+        document.onmouseup=function(ev){
+            el.onmousemove=null
+            el.releaseCapture()
+        }
+/*
+    var $tar = $(this);
 	var $input=$("input:focus").blur();
 	if($(e.target).hasClass("close")||$(e.target).closest(".close").length){
 		return;
 	}
-	$tar.addClass("grabbing");
+    $tar.addClass("grabbing");
+    return;
 	//	if ($tar.hasClass("close")) {
 	//		return;
 	//	};
 	//	if (!$tar.hasClass("modal-header")) {
 	//		$tar = $tar.parents(".modal-header")
-	//	};
+    //	};
+    
 	var oDiv = $tar[0];
 	var disX = 0;
 	var disY = 0;
@@ -92,7 +129,8 @@ export default {
 			$input=null;
 		}
 	}
-	return false; // 阻止默认事件,解决火狐的bug
+    return false; // 阻止默认事件,解决火狐的bug
+    */
 }
 	}
 }
@@ -104,44 +142,8 @@ export default {
 
 <style scoped>
 .grabbing{
-	cursor: -webkit-grabbing !important;
-	cursor:grabbing !important;
-}
-.modal-footer .btn+.btn {
-    margin-bottom: 0;
-    margin-left: 5px;
-}
-
-.btn-default {
-    background-color: #e5e6e6;
-    border-color: #e5e6e6;
-    border: 1px solid #d9d9d9;
-}
-
-.btn-success {
-    color: #4caf50;
-    color: #fff;
-    background-color: #4caf50;
-    border-color: #4caf50;
-}
-
-.btn {
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: 400;
-    text-align: center;
-    vertical-align: middle;
-    touch-action: manipulation;
-    background-image: none;
-    border: 1px solid transparent;
-    white-space: nowrap;
-    padding: 1px 14px;
-    line-height: 1.846153846;
-    border-radius: 4px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	cursor: -webkit-grabbing!important;
+	cursor:grabbing!important;
 }
 
 .modal-footer {

@@ -17,12 +17,14 @@ import '@/assets/svg-icons'
 import '@/wisemis-components'
 import '@/components'
 
-import '@/mock'
+//import '@/mock'
 import pluginLog from '@/plugin/log'
 import pluginError from '@/plugin/error'
 import pluginImport from '@/plugin/import'
 import pluginExport from '@/plugin/export'
 import pluginOpen from '@/plugin/open'
+
+Vue.config.debug=true;
 
 import axios from '@/plugin/axios'
 Vue.prototype.$axios=axios
@@ -78,7 +80,6 @@ new Vue({
   watch: {
     // 监听路由 控制侧边栏显示
     '$route.matched' (val) {
-      console.log(val)
       //const _side = menuAside.filter(menu => menu.path === val[0].path)
       const _side = this.$store.state.d2admin.menuHeader.filter(menu => menu.path === val[0].path)
       this.$store.commit('d2adminMenuAsideSet', _side.length > 0 ? _side[0].children : [])

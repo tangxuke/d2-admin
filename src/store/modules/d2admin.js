@@ -121,6 +121,8 @@ export default {
           commit('d2adminUserInfoSet', {
             name: res.result.name
           })
+          //获取菜单
+          commit('get-menu',vm)
           // 用户登陆后从数据库加载一系列的设置
           commit('d2adminLoginSuccessLoad')
           // 跳转路由
