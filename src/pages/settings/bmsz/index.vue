@@ -2,7 +2,7 @@
 <template>
     <d2-container>
         <button @click="show">Modal Test</button>
-        <wisemis-modal v-if="visible"></wisemis-modal>
+        <wisemis-modal ref="modal">test</wisemis-modal>
     </d2-container>
     
 </template>
@@ -15,7 +15,7 @@ export default {
     },
     methods:{
         show:function(){
-            this.visible=true;
+            this.$refs.modal.visible=true;
         }
     }
 }

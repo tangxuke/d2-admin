@@ -17,6 +17,11 @@ import '@/assets/svg-icons'
 import '@/wisemis-components'
 import '@/components'
 
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
+Vue.use(iView);
+
+
 //import '@/mock'
 import pluginLog from '@/plugin/log'
 import pluginError from '@/plugin/error'

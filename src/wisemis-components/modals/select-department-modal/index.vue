@@ -1,5 +1,3 @@
 <template>
-    <div>
-        部门选择框
-    </div>
+    <wisemis-modal></wisemis-modal>
 </template>
