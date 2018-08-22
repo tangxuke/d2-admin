@@ -16,3 +16,24 @@
     </Row>     
 </d2-container>
 </template>
+
+<script>
+import Controller from '@/wisemis-components/common/controller'
+export default {
+    data:function(){
+        return {
+
+        }
+    },
+    methods:{
+
+    },
+    mounted:function(){
+
+    },
+    watch:{
+        
+    }
+}
+</script>
+
