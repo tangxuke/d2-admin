@@ -1,23 +1,18 @@
-
 <template>
-    <d2-container>
-        <button @click="show">Modal Test</button>
-        <wisemis-modal ref="modal">test</wisemis-modal>
-    </d2-container>
-    
+<d2-container>
+    <Row>
+        <Col>
+            <my-toolbar></my-toolbar>
+            <Divider />
+        </Col>
+    </Row>
+    <Row  :gutter="16">
+        <Col span="12">
+            <my-tree></my-tree>
+        </Col>
+        <Col span="12">
+            <my-table></my-table>
+        </Col>
+    </Row>     
+</d2-container>
 </template>
-<script>
-export default {
-    data:function(){
-        return {
-            visible:false
-        }
-    },
-    methods:{
-        show:function(){
-            this.$refs.modal.visible=true;
-        }
-    }
-}
-</script>
-  
