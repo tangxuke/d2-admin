@@ -28,8 +28,7 @@ export default {
 
     },
     mounted:function(){
-        var app=new Controller();
-        app.
+
     },
     watch:{
         

@@ -54,7 +54,7 @@
 				
 			},
 			getData:function(){
-
+				Query().
 			}
 		},
 		mounted:function(){
