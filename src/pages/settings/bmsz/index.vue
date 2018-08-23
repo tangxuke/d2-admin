@@ -22,14 +22,14 @@ import Controller from '@/wisemis-components/common/controller'
 export default {
     data:function(){
         return {
-
         }
     },
     methods:{
 
     },
     mounted:function(){
-
+        var app=new Controller();
+        app.
     },
     watch:{
         
