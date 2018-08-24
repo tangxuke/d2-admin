@@ -8,7 +8,7 @@
     </Row>
     <Row  :gutter="16">
         <Col span="12">
-            <my-tree></my-tree>
+            <my-tree model="department"></my-tree>
         </Col>
         <Col span="12">
             <my-table></my-table>
@@ -16,23 +16,3 @@
     </Row>     
 </d2-container>
 </template>
-
-<script>
-import Controller from '@/wisemis-components/common/controller'
-export default {
-    data:function(){
-        return {
-        }
-    },
-    methods:{
-
-    },
-    mounted:function(){
-
-    },
-    watch:{
-        
-    }
-}
-</script>
-

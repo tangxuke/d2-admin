@@ -54,13 +54,10 @@
 				
 			},
 			getData:function(){
-				Query().
+				
 			}
 		},
 		mounted:function(){
-			if(this.modelName==undefined){
-				alert('请定义模型名称！')
-			}
 		}
 	}
 </script>
