@@ -2,9 +2,20 @@
     <Tree :data="data5" :render="renderContent"></Tree>
 </template>
 <script>
-    import axios from 'axios'
     export default {
-        props:['model'],
+        props:{
+            model:{
+                type:String,
+                required:true
+            },
+            action:{
+                type:String,
+                default:'tree'
+            },
+            event:{
+                type:Object
+            }
+        },
         data () {
             return {
                 data5: [],
@@ -22,7 +33,16 @@
                         width: '100%'
                     }
                 }, [
-                    h('span', [
+                    h('span',{
+                        style:{
+                            cursor:'pointer'
+                        },
+                        on:{
+                            click:()=>{
+                                this.expand({ root, node, data });
+                            }
+                        }
+                    }, [
                         h('Icon', {
                             props: {
                                 type: data.icon,
@@ -63,35 +83,49 @@
                     ])
                 ]);
             },
+            expand({ root, node, data }){
+                if(data.expand)
+                    this.$set(data,'expand',false);
+                else
+                    this.$set(data,'expand',true);
+                //发出节点数据改变通知
+                this.event.$emit(`OnData`,data);
+                
+            },
             append (data) {
-                const children = data.children || [];
-                this.$prompt('请输入节点名称', '提示').then(({ value }) => {
-                    children.push({title:value,expand:true})
-                    this.$set(data, 'children', children);
-                });
+                //发出节点数据改变通知
+                this.event.$emit(`OnData-NewChild`,data);
             },
             remove (root, node, data) {
                 const parentKey = root.find(el => el === node).parent;
                 const parent = root.find(el => el.nodeKey === parentKey).node;
                 const index = parent.children.indexOf(data);
                 parent.children.splice(index, 1);
+            },
+            getModelData(){
+                if(!this.model){
+                    console.log('没有设置模型名称！');
+                    return;
+                }
+                this.$axios.post(`/models/${this.model}/${this.action}`).then(value=>{
+
+                    if(value.success){
+                        this.data5=value.result;
+                    }else{
+                        alert(value.message)
+                    }
+                }).catch(reason=>{
+                    alert(reason.message);
+                })
             }
         },
         mounted:function(){
-
-            if(!this.model){
-                alert('没有设置模型名称！');
-                return;
-            }
-            this.$axios.post(`/models/${this.model}/tree`).then(value=>{
-
-                if(value.success){
-                    this.data5=value.result;
-                }else{
-                    alert(value.message)
-                }
-            }).catch(reason=>{
-                alert(reason);
+            this.getModelData();
+            
+        },
+        created:function(){
+            this.event.$on('OnSave',data=>{
+                this.getModelData();
             })
         }
     }

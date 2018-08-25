@@ -1,74 +1,97 @@
 <template>
-    <Form :model="formItem" :label-width="80">
-        <FormItem label="Input">
-            <Input v-model="formItem.input" placeholder="Enter something..."></Input>
-        </FormItem>
-        <FormItem label="Select">
-            <Select v-model="formItem.select">
-                <Option value="beijing">New York</Option>
-                <Option value="shanghai">London</Option>
-                <Option value="shenzhen">Sydney</Option>
-            </Select>
-        </FormItem>
-        <FormItem label="DatePicker">
-            <Row>
-                <Col span="11">
-                    <DatePicker type="date" placeholder="Select date" v-model="formItem.date"></DatePicker>
-                </Col>
-                <Col span="2" style="text-align: center">-</Col>
-                <Col span="11">
-                    <TimePicker type="time" placeholder="Select time" v-model="formItem.time"></TimePicker>
-                </Col>
-            </Row>
-        </FormItem>
-        <FormItem label="Radio">
-            <RadioGroup v-model="formItem.radio">
-                <Radio label="male">Male</Radio>
-                <Radio label="female">Female</Radio>
-            </RadioGroup>
-        </FormItem>
-        <FormItem label="Checkbox">
-            <CheckboxGroup v-model="formItem.checkbox">
-                <Checkbox label="Eat"></Checkbox>
-                <Checkbox label="Sleep"></Checkbox>
-                <Checkbox label="Run"></Checkbox>
-                <Checkbox label="Movie"></Checkbox>
-            </CheckboxGroup>
-        </FormItem>
-        <FormItem label="Switch">
-            <i-switch v-model="formItem.switch" size="large">
-                <span slot="open">On</span>
-                <span slot="close">Off</span>
-            </i-switch>
-        </FormItem>
-        <FormItem label="Slider">
-            <Slider v-model="formItem.slider" range></Slider>
-        </FormItem>
-        <FormItem label="Text">
-            <Input v-model="formItem.textarea" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
-        </FormItem>
-        <FormItem>
-            <Button type="primary">Submit</Button>
-            <Button style="margin-left: 8px">Cancel</Button>
-        </FormItem>
-    </Form>
+    <div is="Form" :label-width="80">
+        <div is="Row"> 
+                <div is="Col"  v-for="field in fields" :span="field.ColSpan" :key="field.Name">
+                    <div is="FormItem" :label="field.Title || field.Name">
+                        <div :is="field.ControlType"  v-model="field.Value" :placeholder="`请输入${(field.Title || field.Name)}...`">
+                            <div is="Option" v-for="item in field.Options" :value="item.value" :key="item.value">{{ item.label }}</div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <Row>
+            <Col>
+                <Button type="success" @click="save">保存</Button>
+            </Col>
+        </Row>
+    </div>
 </template>
 <script>
-    export default {
-        data () {
-            return {
-                formItem: {
-                    input: '',
-                    select: '',
-                    radio: 'male',
-                    checkbox: [],
-                    switch: true,
-                    date: '',
-                    time: '',
-                    slider: [20, 50],
-                    textarea: ''
-                }
-            }
-        }
+export default {
+  props: {
+    model: {
+      type: String,
+      required: true
+    },
+    action: {
+      type: String,
+      default: "form"
+    },
+    event:{
+        type:Object
     }
+  },
+  data() {
+    return {
+        /**
+         * 字段列表 
+         */
+        fields:[]
+    };
+  },
+  methods:{
+      save:function(){
+          var data={};
+          this.fields.forEach(item=>{
+              data[item.Name]=item.Value;
+          })
+          this.$axios.post(`/models/${this.model}/save`,data)
+          .then(value=>{
+              if(value.success){
+                  this.event.$emit('OnSave',data);
+              }
+              else{
+                  alert(value.message);
+              }
+              
+          }).catch(err=>{
+              alert(err.message);
+          })
+          
+      }
+  },
+  mounted:function(){
+      
+    if(!this.model){
+            console.log('没有设置模型名称！');
+            return;
+        }
+        this.$axios.post(`/models/${this.model}/${this.action}`).then(value=>{
+            if(value.success){
+                    this.fields=value.result.Fields.map(item=>{
+                        item.ColSpan=24/value.result.ColumnCount*item.ColSpan;
+                        if(item.ColSpan>24)
+                            item.ColSpan=24;
+                        return item;
+                    });
+                }else{
+                    alert(value.message)
+                }
+            }).catch(reason=>{
+                alert(reason.message);
+            })
+  },
+  created:function(){
+
+      this.event.$on('OnData',data=>{
+          this.fields.forEach(item=>{
+              item.Value=data[item.Name]
+          });
+      });
+
+      this.event.$on('OnData-NewChild',data=>{
+      });
+  }
+
+};
 </script>
