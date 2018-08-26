@@ -34,6 +34,9 @@ Vue.config.debug=true;
 import axios from '@/plugin/axios'
 Vue.prototype.$axios=axios
 
+//事件总线
+Vue.prototype.$eventhub=new Vue();
+
 // 菜单和路由设置
 import router from './router'
 //import { menuHeader, menuAside } from '@/menu'

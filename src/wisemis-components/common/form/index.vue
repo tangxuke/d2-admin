@@ -48,7 +48,7 @@ export default {
           this.$axios.post(`/models/${this.model}/save`,data)
           .then(value=>{
               if(value.success){
-                  this.event.$emit('OnSave',data);
+                  this.$eventhub.$emit(`DATA-${this.model}`,data);
               }
               else{
                   alert(value.message);
@@ -83,14 +83,13 @@ export default {
   },
   created:function(){
 
-      this.event.$on('OnData',data=>{
+      this.$eventhub.$on(`ROW-DATA-${this.model}`,data=>{
           this.fields.forEach(item=>{
               item.Value=data[item.Name]
           });
       });
 
-      this.event.$on('OnData-NewChild',data=>{
-      });
+      
   }
 
 };

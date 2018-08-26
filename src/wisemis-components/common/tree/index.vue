@@ -89,18 +89,35 @@
                 else
                     this.$set(data,'expand',true);
                 //发出节点数据改变通知
-                this.event.$emit(`OnData`,data);
+                this.$eventhub.$emit(`ROW-DATA-${this.model}`,data);
                 
             },
             append (data) {
                 //发出节点数据改变通知
-                this.event.$emit(`OnData-NewChild`,data);
+                this.$eventhub.$emit(`ROW-NEWCHILD-${this.model}`,data);
             },
             remove (root, node, data) {
+                /*
                 const parentKey = root.find(el => el === node).parent;
                 const parent = root.find(el => el.nodeKey === parentKey).node;
                 const index = parent.children.indexOf(data);
                 parent.children.splice(index, 1);
+                */
+                //删除节点
+                this.$axios.post(`/models/${this.model}/delete`,data)
+                .then(value=>{
+                    if(value.success){
+                        //发出节点数据改变通知
+                        this.$eventhub.$emit(`ROW-REMOVE-${this.model}`,data);
+                        this.$eventhub.$emit(`DATA-${this.model}`,data);
+                    }else{
+                        alert(value.message);
+                    }
+                })
+                .catch(reason=>{
+                    alert(reason.message);
+                })
+                
             },
             getModelData(){
                 if(!this.model){
@@ -110,7 +127,10 @@
                 this.$axios.post(`/models/${this.model}/${this.action}`).then(value=>{
 
                     if(value.success){
-                        this.data5=value.result;
+                        this.data5=value.result.map(item=>{
+                            item['expand']=true;
+                            return item;
+                        });
                     }else{
                         alert(value.message)
                     }
@@ -121,10 +141,9 @@
         },
         mounted:function(){
             this.getModelData();
-            
         },
         created:function(){
-            this.event.$on('OnSave',data=>{
+            this.$eventhub.$on(`DATA-${this.model}`,data=>{
                 this.getModelData();
             })
         }
